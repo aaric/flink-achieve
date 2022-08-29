@@ -12,6 +12,6 @@
 
 |No.|Chapter|Class|Remark|
 |:---:|-----|-----|-----|
-|1|第一章|[`BatchTextTests`](blob/master/src/test/java/com/sample/flink/.java)|*批处理*|
-|2|第一章|[`BoundedStreamTextTests`](blob/master/src/test/java/com/sample/flink/BoundedStreamTextTests.java)|*有界流处理*|
-|3|第一章|[`StreamTextTests`](blob/master/src/test/java/com/sample/flink/StreamTextTests.java)|*无界流处理，Socket Serve：`nc -lk 7777`*|
+|1|第一章|[`BatchTextTests`](src/test/java/com/sample/flink/.java)|*批处理*|
+|2|第一章|[`BoundedStreamTextTests`](src/test/java/com/sample/flink/BoundedStreamTextTests.java)|*有界流处理*|
+|3|第一章|[`StreamTextTests`](src/test/java/com/sample/flink/StreamTextTests.java)|*无界流处理，Socket Serve：`nc -lk 7777`*|
