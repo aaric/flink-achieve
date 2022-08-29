@@ -22,8 +22,8 @@ public class BatchTextTests {
     public void testCount() throws Exception {
         // DataSet API
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-        DataSource<String> dataSource = env.readTextFile("input/sample.txt");
-        FlatMapOperator<String, Tuple2<String, Long>> operator = dataSource.flatMap((String line, Collector<Tuple2<String, Long>> out) -> {
+        DataSource<String> ds = env.readTextFile("input/sample.txt");
+        FlatMapOperator<String, Tuple2<String, Long>> operator = ds.flatMap((String line, Collector<Tuple2<String, Long>> out) -> {
             String[] words = line.split(" ");
             for (String word : words) {
                 out.collect(Tuple2.of(word, 1L));

@@ -26,6 +26,7 @@ dependencies {
     implementation "org.apache.flink:flink-clients_2.12"
 
     testImplementation "org.junit.jupiter:junit-jupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-params"
 }
 
 dependencyManagement {
@@ -35,13 +36,16 @@ dependencyManagement {
             entry "slf4j-simple"
         }
 
+        dependencySet(group: "org.junit.jupiter", version: "5.8.2") {
+            entry "junit-jupiter"
+            entry "junit-jupiter-params"
+        }
+
         dependencySet(group: "org.apache.flink", version: "1.13.6") {
             entry "flink-java"
             entry "flink-streaming-java_2.12"
             entry "flink-clients_2.12"
         }
-
-        dependency "org.junit.jupiter:junit-jupiter:5.8.2"
     }
 }
 
@@ -57,6 +61,10 @@ compileTestJava {
 
 test {
     useJUnitPlatform()
+
+    // gradle.properties: systemProp.*
+    println System.getProperty("socket.hostname") ? System.getProperty("socket.hostname") : 'unknown'
+    println System.getProperty("socket.port") ? System.getProperty("socket.port") : 'unknown'
 }
 
 task removeLombokConfig() {

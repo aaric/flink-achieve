@@ -7,3 +7,11 @@
 [![Release](https://img.shields.io/badge/Release-0.1.0-informational.svg)](https://github.com/aaric/flink-achieve/releases)
 
 > Flink Learning.
+
+# Sample
+
+|No.|Version|Sample|Remark|
+|:---:|:---:|-----|-----|
+|1|`0.1.0-SNAPSHOT`|[`BatchTextTests`](src/test/java/com/sample/flink/BatchTextTests.java)|*批处理*|
+|2|`0.1.0-SNAPSHOT`|[`BoundedStreamTextTests`](src/test/java/com/sample/flink/BoundedStreamTextTests.java)|*有界流处理*|
+|3|`0.1.0-SNAPSHOT`|[`StreamTextTests`](src/test/java/com/sample/flink/StreamTextTests.java)|*无界流处理，Socket Serve：`nc -lk 7777`*|
