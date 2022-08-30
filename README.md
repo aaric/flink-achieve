@@ -27,7 +27,7 @@ tar -zxvf flink-1.13.6-bin-scala_2.12.tgz -C /opt/
 cd /opt/flink-1.13.6/
 ```
 
-### 2.2 Start up
+### 2.2 Startup
 
 #### Single node
 
