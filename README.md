@@ -21,7 +21,8 @@
 ### 2.1 Download
 
 ```bash
-curl -o flink-1.13.6-bin-scala_2.12.tgz https://dlcdn.apache.org/flink/flink-1.13.6/flink-1.13.6-bin-scala_2.12.tgz
+curl -o flink-1.13.6-bin-scala_2.12.tgz \
+  https://dlcdn.apache.org/flink/flink-1.13.6/flink-1.13.6-bin-scala_2.12.tgz
 tar -zxvf flink-1.13.6-bin-scala_2.12.tgz -C /opt/
 cd /opt/flink-1.13.6/
 ```
