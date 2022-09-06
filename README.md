@@ -41,6 +41,7 @@ localhost
 EOF
 
 # https://localhost:8081
+#/opt/flink-1.13.6/bin/stop-cluster.sh
 /opt/flink-1.13.6/bin/start-cluster.sh
 ```
 
@@ -87,6 +88,7 @@ EOF
 #scp -r /opt/flink-1.13.6 root@centos-v7-s2:/opt/
 #scp -r /opt/flink-1.13.6 root@centos-v7-s3:/opt/
 
+# http://centos-v7-s1:8081
 #/opt/flink-1.13.6/bin/stop-cluster.sh
 /opt/flink-1.13.6/bin/start-cluster.sh
 ```
