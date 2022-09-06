@@ -8,32 +8,21 @@ import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 
 /**
- * StreamTextTests
+ * StreamTextMain
  *
- * @author Aaric, created on 2022-08-29T10:48.
- * @version 0.1.0-SNAPSHOT
+ * @author Aaric, created on 2022-09-06T13:51.
+ * @version 0.2.0-SNAPSHOT
  */
-public class StreamTextTests {
+public class StreamTextMain {
 
-    @BeforeAll
-    public static void setUp() {
-        System.setProperty("socket.hostname", "centos-v7-s1");
-        System.setProperty("socket.port", "7777");
-    }
-
-    @Disabled
-    @Test
-    public void testCount() throws Exception {
-        // DataStream API
+    public static void main(String[] args) throws Exception {
         // Socket Serve: nc -lk 7777
+        // Startup: java -jar flink-achieve-0.2.0-SNAPSHOT.jar --hostname centos-v7-s1 --port 7777
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        ParameterTool pTool = ParameterTool.fromSystemProperties();
-        DataStreamSource<String> dss = env.socketTextStream(pTool.get("socket.hostname"), pTool.getInt("socket.port"));
+        ParameterTool pTool = ParameterTool.fromArgs(args);
+        DataStreamSource<String> dss = env.socketTextStream(pTool.get("hostname"), pTool.getInt("port"));
         SingleOutputStreamOperator<Tuple2<String, Long>> operator = dss.flatMap((String line, Collector<Tuple2<String, Long>> out) -> {
             String[] words = line.split(" ");
             for (String word : words) {
