@@ -29,7 +29,7 @@ cd /opt/flink-1.13.6/
 
 ### 2.2 Startup
 
-#### Single node
+#### 2.2.1 Single node
 
 ```bash
 cat > /opt/flink-1.13.6/conf/masters <<-'EOF'
@@ -44,7 +44,7 @@ EOF
 /opt/flink-1.13.6/bin/start-cluster.sh
 ```
 
-#### Cluster nodes
+#### 2.2.2 Cluster nodes
 
 |No.|Hostname|IP|Role|Remark|
 |:---:|:---:|:---:|:---:|----|
@@ -53,6 +53,7 @@ EOF
 |3|`centos-v7-s3`|`172.16.0.3`|`Worker`||
 
 ```bash
+# s1, s2, s3
 cat >> /etc/hosts <<-'EOF'
 
 # flink nodes
@@ -61,15 +62,31 @@ cat >> /etc/hosts <<-'EOF'
 172.16.0.3 centos-v7-s3
 EOF
 
+# s1
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+
+# copy to s2, s3
+ssh-copy-id root@centos-v7-s2
+ssh-copy-id root@centos-v7-s3
+
+vim /opt/flink-1.13.6/conf/flink-conf.yaml
+'''
+jobmanager.rpc.address: centos-v7-s1
+'''
+
 cat > /opt/flink-1.13.6/conf/masters <<-'EOF'
 centos-v7-s1:8081
 EOF
 
 cat > /opt/flink-1.13.6/conf/workers <<-'EOF'
-centos-v7-s1
 centos-v7-s2
 centos-v7-s3
 EOF
 
+# copy to s2, s3
+# scp -r /opt/flink-1.13.6 root@centos-v7-s2:/opt/
+# scp -r /opt/flink-1.13.6 root@centos-v7-s3:/opt/
+
+# /opt/flink-1.13.6/bin/stop-cluster.sh
 /opt/flink-1.13.6/bin/start-cluster.sh
 ```
