@@ -48,7 +48,7 @@ EOF
 
 |No.|Hostname|IP|Role|Remark|
 |:---:|:---:|:---:|:---:|----|
-|1|`centos-v7-s1`|`172.16.0.1`|`Master`||
+|1|`centos-v7-s1`|`172.16.0.1`|`Master`|*password-free ssh login to others*|
 |2|`centos-v7-s2`|`172.16.0.2`|`Worker`||
 |3|`centos-v7-s3`|`172.16.0.3`|`Worker`||
 
@@ -84,9 +84,9 @@ centos-v7-s3
 EOF
 
 # copy to s2, s3
-# scp -r /opt/flink-1.13.6 root@centos-v7-s2:/opt/
-# scp -r /opt/flink-1.13.6 root@centos-v7-s3:/opt/
+#scp -r /opt/flink-1.13.6 root@centos-v7-s2:/opt/
+#scp -r /opt/flink-1.13.6 root@centos-v7-s3:/opt/
 
-# /opt/flink-1.13.6/bin/stop-cluster.sh
+#/opt/flink-1.13.6/bin/stop-cluster.sh
 /opt/flink-1.13.6/bin/start-cluster.sh
 ```
