@@ -94,7 +94,7 @@ EOF
 /opt/flink-1.13.6/bin/start-cluster.sh
 ```
 
-## 3 Deployment
+## 3 Deploy
 
 1. Session Mode
 2. Pre-Job Mode
