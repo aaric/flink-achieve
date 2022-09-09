@@ -100,6 +100,8 @@ EOF
 2. Pre-Job Mode
 3. Application Mode
 
+### 3.1 Flink
+
 ```bash
 /opt/flink-1.13.6/bin/flink run -m centos-v7-s1:8081 \
   -c com.sample.flink.StreamTextMain \
@@ -107,3 +109,79 @@ EOF
 
 /opt/flink-1.13.6/bin/flink cancel b894ad515b13e4773f2f42188bb34ab8
 ```
+
+### 3.2 Yarn
+
+> [Fink 1.13.6  - Hadoop Compatibility](https://nightlies.apache.org/flink/flink-docs-release-1.13/docs/dev/dataset/hadoop_compatibility/)
+
+```bash
+# hadoop-2.10.2
+https://blog.csdn.net/jassyzhen/article/details/115405652
+https://zhuanlan.zhihu.com/p/258614641
+```
+
+二、hadoop环境搭建(伪分布式)
+1.设置JAVA_HOME信息(etc/hadoop/hadoop-env.sh):
+# set to the root of your Java installation
+export JAVA_HOME=/usr/local/java/jdk1.8.0_121
+2.配置core-site.xml(etc/hadoop/core-site.xml)
+<configuration>
+<property>
+<name>hadoop.tmp.dir</name>
+<value>/opt/hadoop-2.7.4/tmp</value>
+</property>
+<property>
+<name>fs.defaultFS</name>
+<!-- <value>hdfs://linux7-1:9000</value> -->
+<value>hdfs://linux7-1:8020</value>
+</property>
+</configuration>
+3.配置hdfs-site.xml(etc/hadoop/hdfs-site.xml)
+<configuration>
+<property>
+<name>dfs.replication</name>
+<value>1</value>
+</property>
+<property>
+<name>dfs.permissions.enabled</name>
+<value>false</value>
+</property>
+</configuration>
+4.设置免密码登录
+~> ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+~> cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+~> chmod 0600 ~/.ssh/authorized_keys
+5.格式化namenode
+~> bin/hdfs namenode -format
+6.启动hdfs
+~> sbin/start-dfs.sh
+7.访问hdfs
+http://linux7-1:50070/
+8.dfs操作
+~> bin/hdfs dfs -mkdir /test
+~> bin/hdfs dfs -ls /
+~> bin/hdfs dfs -put README.txt /README.txt
+~> bin/hdfs dfs -get /README.txt /root/README-copy.txt
+~> bin/hdfs dfs -cat /README.txt
+9.关闭hdfs
+~> sbin/stop-dfs.sh
+10.配置mapred-site.xml(etc/hadoop/mapred-site.xml)
+<configuration>
+<property>
+<name>mapreduce.framework.name</name>
+<value>yarn</value>
+</property>
+</configuration>
+11.配置yarn-site.xml(etc/hadoop/yarn-site.xml)
+<configuration>
+<property>
+<name>yarn.nodemanager.aux-services</name>
+<value>mapreduce_shuffle</value>
+</property>
+</configuration>
+12.启动yarn
+~> sbin/start-yarn.sh
+13.访问yarn
+http://linux7-1:8088/
+14.关闭yarn
+~> sbin/stop-yarn.sh

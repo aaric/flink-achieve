@@ -24,6 +24,7 @@ dependencies {
     implementation "org.apache.flink:flink-java"
     implementation "org.apache.flink:flink-streaming-java_2.12"
     implementation "org.apache.flink:flink-clients_2.12"
+//    implementation "org.apache.flink:flink-hadoop-compatibility_2.12"
 
     testImplementation "org.junit.jupiter:junit-jupiter"
     testImplementation "org.junit.jupiter:junit-jupiter-params"
@@ -45,6 +46,7 @@ dependencyManagement {
             entry "flink-java"
             entry "flink-streaming-java_2.12"
             entry "flink-clients_2.12"
+            entry "flink-hadoop-compatibility_2.12"
         }
     }
 }
